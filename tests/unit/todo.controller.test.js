@@ -33,18 +33,18 @@ describe('TodoController.createTodo', () => {
     expect(TodoModel.create).toBeCalledWith(newTodo);
   });
   // Test that response code is correct
-  it('Sholud return 201 response code', () => {
-    TodoController.createTodo(req, res, next);
+  it('Sholud return 201 response code', async () => {
+    await TodoController.createTodo(req, res, next);
     // To check response code
     expect(res.statusCode).toBe(201);
     // To check that response sent
     expect(res._isEndCalled()).toBeTruthy();
   });
   // Test that JSON document returned
-  it('Should return JSON data', () => {
+  it('Should return JSON data', async () => {
     // Creating mock return value from model
     TodoModel.create.mockReturnValue(newTodo);
-    TodoController.createTodo(req, res, next);
+    await TodoController.createTodo(req, res, next);
     expect(res._getJSONData()).toStrictEqual(newTodo);
   });
 });
